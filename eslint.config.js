@@ -1,4 +1,4 @@
-import { configs as jsEslintConfig } from '@eslint/js'
+import jsEslint from '@eslint/js'
 import tsParser from '@typescript-eslint/parser'
 import importXPlugin from 'eslint-plugin-import-x'
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y'
@@ -11,14 +11,24 @@ import { configs as tsEslintConfig } from 'typescript-eslint'
 
 /** @type {import('eslint').Linter.Config} */
 export default [
-  jsEslintConfig.recommended,
+  jsEslint.configs.recommended,
   ...tsEslintConfig.recommended,
   importXPlugin.flatConfigs.recommended,
   importXPlugin.flatConfigs.typescript,
   prettierPlugin,
   {
+    ignores: [
+      '.react-router/',
+      '.wrangler/',
+      'build/',
+      'node_modules/',
+      '!**/.server',
+      '!**/.client',
+      'worker-configuration.d.ts',
+    ],
+  },
+  {
     files: ['**/*.{js,jsx,ts,tsx}'],
-    ignores: ['node_modules/', '.wrangler/', '!**/.server', '!**/.client', 'build/'],
     plugins: {
       'import-sort': importSortPlugin,
       react: reactPlugin,

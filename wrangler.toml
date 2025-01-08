@@ -1,0 +1,10 @@
+name = "example"
+compatibility_date = "2025-01-08"
+compatibility_flags = ["nodejs_compat"]
+minify = true
+upload_source_maps = false
+
+[dev]
+ip = "localhost"
+port = 2222
+local_protocol = "http"

@@ -1,8 +1,8 @@
-import type { LinksFunction } from '@remix-run/cloudflare'
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react'
-
 import './styles/app.css'
-import { ErrorBoundary } from './components/error-boundary'
+
+import { ErrorBoundary } from '@components/error-boundary'
+import type { LinksFunction } from 'react-router'
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
 
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -13,7 +13,7 @@ export const links: LinksFunction = () => [
   },
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Nunito:wght@300..7000&display=swap',
+    href: 'https://fonts.googleapis.com/css2?family=Nunito:wght@300..700&display=swap',
   },
 ]
 

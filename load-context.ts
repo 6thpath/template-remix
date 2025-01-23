@@ -1,6 +1,6 @@
 import { type PlatformProxy } from 'wrangler'
 
-type Env = object
+export type Env = object
 
 type Cloudflare = Omit<PlatformProxy<Env>, 'dispose'>
 

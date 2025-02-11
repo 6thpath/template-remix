@@ -2,8 +2,8 @@
 {
   "name": "Ubuntu",
   "build": {
-    "dockerfile": "./Dockerfile"
-    // "context": "."
+    "dockerfile": "./Dockerfile",
+    "context": "."
   },
 
   // More info: https://containers.dev/features.
@@ -16,46 +16,44 @@
       "installZsh": "true",
       "configureZshAsDefaultShell": "true",
       "installOhMyZsh": "true",
+      "username": "nonroot",
       "userUid": "1000",
       "userGid": "1000",
       "upgradePackages": "true"
     },
     "ghcr.io/devcontainers-extra/features/zsh-plugins:0": {
-      "plugins": "ssh-agent zsh-autosuggestions zsh-syntax-highlighting",
+      "plugins": "zsh-autosuggestions zsh-syntax-highlighting",
       "omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions https://github.com/zsh-users/zsh-syntax-highlighting"
     },
     "ghcr.io/devcontainers/features/node:1": {
       "version": "lts",
-      "pnpmVersion": "10.2.1"
+      "pnpmVersion": "latest"
     }
   },
 
   "mounts": [
-    // {
-    //   "source": "${localEnv:HOME}/.ssh",
-    //   "target": "/home/vscode/.ssh",
-    //   "type": "bind"
-    // },
     {
       "source": "pnpm-store",
-      "target": "/home/${localEnv:USER}/.pnpm-store",
+      "target": "/root/.pnpm-store",
       "type": "volume"
     }
   ],
 
-  "postCreateCommand": ["pnpm config set store-dir /home/${USER}/.pnpm-store"],
+  "postCreateCommand": {
+    "pnpm-setup": "pnpm config set store-dir /root/.pnpm-store"
+  },
   "forwardPorts": [5173],
 
   "customizations": {
     "vscode": {
-      "extensions": ["esbenp.prettier-vscode", "ms-azuretools.vscode-docker"]
-      // "settings": {
-      //   "terminal.integrated.shell.linux": "/bin/zsh",
-      //   "terminal.integrated.defaultProfile.linux": "zsh"
-      // }
+      "extensions": ["esbenp.prettier-vscode", "ms-azuretools.vscode-docker"],
+      "settings": {
+        "terminal.integrated.shell.linux": "/usr/bin/zsh",
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      }
     }
   },
 
   // More info: https://aka.ms/dev-containers-non-root.
-  "remoteUser": "${localEnv:USER}"
+  "remoteUser": "root"
 }

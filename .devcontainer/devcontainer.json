@@ -1,0 +1,59 @@
+// More info: https://aka.ms/devcontainer.json
+{
+  "name": "Ubuntu",
+  "build": {
+    "dockerfile": "./Dockerfile",
+    "context": "."
+  },
+
+  // More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest",
+      "ppa": "false"
+    },
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": "true",
+      "configureZshAsDefaultShell": "true",
+      "installOhMyZsh": "true",
+      "username": "nonroot",
+      "userUid": "1000",
+      "userGid": "1000",
+      "upgradePackages": "true"
+    },
+    "ghcr.io/devcontainers-extra/features/zsh-plugins:0": {
+      "plugins": "zsh-autosuggestions zsh-syntax-highlighting",
+      "omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions https://github.com/zsh-users/zsh-syntax-highlighting"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts",
+      "pnpmVersion": "latest"
+    }
+  },
+
+  "mounts": [
+    {
+      "source": "pnpm-store",
+      "target": "/root/.pnpm-store",
+      "type": "volume"
+    }
+  ],
+
+  "postCreateCommand": {
+    "pnpm-setup": "pnpm config set store-dir /root/.pnpm-store"
+  },
+  "forwardPorts": [5173],
+
+  "customizations": {
+    "vscode": {
+      "extensions": ["esbenp.prettier-vscode", "ms-azuretools.vscode-docker"],
+      "settings": {
+        "terminal.integrated.shell.linux": "/usr/bin/zsh",
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      }
+    }
+  },
+
+  // More info: https://aka.ms/dev-containers-non-root.
+  "remoteUser": "root"
+}

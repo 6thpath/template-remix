@@ -5,10 +5,10 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "pnpm@9.15.3",
+  "packageManager": "pnpm@10.3.0",
   "sideEffects": false,
   "scripts": {
-    "dev": "react-router dev",
+    "dev": "react-router dev --host",
     "build": "react-router build",
     "start": "wrangler pages dev ./build/client",
     "typecheck": "react-router typegen && tsc",
